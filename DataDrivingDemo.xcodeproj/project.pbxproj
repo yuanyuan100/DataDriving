@@ -14,6 +14,8 @@
 		64B6F1351EF1777900A32615 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64B6F1341EF1777900A32615 /* Assets.xcassets */; };
 		64B6F1381EF1777900A32615 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64B6F1361EF1777900A32615 /* LaunchScreen.storyboard */; };
 		64B6F1431EF1777900A32615 /* DataDrivingDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 64B6F1421EF1777900A32615 /* DataDrivingDemoTests.m */; };
+		64B6F1501EF1789200A32615 /* DDBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 64B6F14F1EF1789200A32615 /* DDBase.m */; };
+		64B6F1531EF17B1700A32615 /* DDNetBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 64B6F1521EF17B1700A32615 /* DDNetBase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		64B6F13E1EF1777900A32615 /* DataDrivingDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataDrivingDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		64B6F1421EF1777900A32615 /* DataDrivingDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataDrivingDemoTests.m; sourceTree = "<group>"; };
 		64B6F1441EF1777900A32615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64B6F14E1EF1789200A32615 /* DDBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDBase.h; sourceTree = "<group>"; };
+		64B6F14F1EF1789200A32615 /* DDBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDBase.m; sourceTree = "<group>"; };
+		64B6F1511EF17B1700A32615 /* DDNetBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNetBase.h; sourceTree = "<group>"; };
+		64B6F1521EF17B1700A32615 /* DDNetBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNetBase.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,7 @@
 		64B6F1271EF1777900A32615 /* DataDrivingDemo */ = {
 			isa = PBXGroup;
 			children = (
+				64B6F14D1EF1786F00A32615 /* Source */,
 				64B6F12B1EF1777900A32615 /* AppDelegate.h */,
 				64B6F12C1EF1777900A32615 /* AppDelegate.m */,
 				64B6F12E1EF1777900A32615 /* ViewController.h */,
@@ -109,6 +116,17 @@
 				64B6F1441EF1777900A32615 /* Info.plist */,
 			);
 			path = DataDrivingDemoTests;
+			sourceTree = "<group>";
+		};
+		64B6F14D1EF1786F00A32615 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				64B6F14E1EF1789200A32615 /* DDBase.h */,
+				64B6F14F1EF1789200A32615 /* DDBase.m */,
+				64B6F1511EF17B1700A32615 /* DDNetBase.h */,
+				64B6F1521EF17B1700A32615 /* DDNetBase.m */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +235,8 @@
 			files = (
 				64B6F1301EF1777900A32615 /* ViewController.m in Sources */,
 				64B6F12D1EF1777900A32615 /* AppDelegate.m in Sources */,
+				64B6F1531EF17B1700A32615 /* DDNetBase.m in Sources */,
+				64B6F1501EF1789200A32615 /* DDBase.m in Sources */,
 				64B6F12A1EF1777900A32615 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +438,7 @@
 				64B6F1491EF1777900A32615 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		64B6F14A1EF1777900A32615 /* Build configuration list for PBXNativeTarget "DataDrivingDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +447,7 @@
 				64B6F14C1EF1777900A32615 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
