@@ -10,6 +10,7 @@
 
 @implementation DDNetObject
 + (instancetype)newObject:(id<DDNetResponder>)delegate {
+    NSAssert(delegate, @"delegate can't be nil");
     
     DDNetObject *obj = [DDNetObject new];
     if ([delegate respondsToSelector:@selector(ddAskNet:response:)]) {

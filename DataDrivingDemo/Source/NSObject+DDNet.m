@@ -88,11 +88,18 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
 }
 
 - (void)dd_replace:(id<DDNetResponder>)before with:(id<DDNetResponder>)after {
-    NSUInteger index = [self.DD_Delegates indexOfObject:[self dd_find:before]];
-    [self.DD_Delegates replaceObjectAtIndex:index withObject:[DDNetObject newObject:after]];
+    if ([self dd_check:before]) {
+        NSUInteger index = [self.DD_Delegates indexOfObject:[self dd_find:before]];
+        [self.DD_Delegates replaceObjectAtIndex:index withObject:[DDNetObject newObject:after]];
+    } else {
+        NSAssert(NO, @"before<DDNetResponder> not found");
+    }
+    
 }
 
 - (BOOL)dd_check:(id<DDNetResponder>)delegate {
+    NSAssert(delegate, @"delegate can't be nil. if nil, return BOOL may be always true");
+    
     for (DDNetObject *obj in self.DD_Delegates) {
         if ([obj.obj isEqual:delegate]) {
             return true;
@@ -103,6 +110,8 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
 }
 
 - (DDNetObject *)dd_find:(id<DDNetResponder>)delegate {
+    NSAssert(delegate, @"delegate can't be nil. if nil, return DDNetObject may not match");
+    
     for (DDNetObject *obj in self.DD_Delegates) {
         if ([obj.obj isEqual:delegate]) {
             return obj;
