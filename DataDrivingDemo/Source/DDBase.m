@@ -7,6 +7,7 @@
 //
 
 #import "DDBase.h"
+#import <KVOController/KVOController.h>
 
 @implementation DDBase
 
