@@ -21,7 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.model = [ViewControllerModel new];
-//    [self.model dd_add:self];
+    [self.model dd_add:self];
 }
 
 - (void)ddAskNet:(id)model response:(id (^)(NSDictionary *))response {
