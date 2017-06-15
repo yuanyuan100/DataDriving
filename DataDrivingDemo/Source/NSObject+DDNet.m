@@ -99,7 +99,7 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
         }
     }
     
-    return NO;
+    return false;
 }
 
 - (DDNetObject *)dd_find:(id<DDNetResponder>)delegate {
@@ -116,7 +116,7 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
     if (self.isDD_AskNet != DD_AskNet) {
         objc_setAssociatedObject(self, NSObjectDD_askNetKey, [NSNumber numberWithBool:DD_AskNet], OBJC_ASSOCIATION_ASSIGN);
         if (DD_AskNet == true) {
-            self.DD_AskNet = NO;
+            self.DD_AskNet = false;
             //主动发起拉取数据网络请求
             for (DDNetObject *obj in self.DD_Delegates) {
                 if (obj.isFlagAsk) {
@@ -154,7 +154,7 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
     if (self.isDD_UploadNet != DD_UploadNet) {
         objc_setAssociatedObject(self, NSObjectDD_askNetKey, [NSNumber numberWithBool:DD_UploadNet], OBJC_ASSOCIATION_ASSIGN);
         if (DD_UploadNet == true) {
-            self.DD_UploadNet = NO;
+            self.DD_UploadNet = false;
             // 主动发起上传数据网络请求
             for (DDNetObject *obj in self.DD_Delegates) {
                 if (obj.isFlagUpload) {
