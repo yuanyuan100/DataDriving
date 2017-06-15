@@ -19,6 +19,7 @@
 		64B6F1351EF1777900A32615 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64B6F1341EF1777900A32615 /* Assets.xcassets */; };
 		64B6F1381EF1777900A32615 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64B6F1361EF1777900A32615 /* LaunchScreen.storyboard */; };
 		64B6F1431EF1777900A32615 /* DataDrivingDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 64B6F1421EF1777900A32615 /* DataDrivingDemoTests.m */; };
+		64C8F0D91EF2DDF300FC88D6 /* NSObject+DDView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64C8F0D81EF2DDF300FC88D6 /* NSObject+DDView.m */; };
 		CD7284E4C67AF4FC6193395C /* libPods-DataDrivingDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB89A698A1B4C1395B305A23 /* libPods-DataDrivingDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,8 @@
 		64B6F13E1EF1777900A32615 /* DataDrivingDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataDrivingDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		64B6F1421EF1777900A32615 /* DataDrivingDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataDrivingDemoTests.m; sourceTree = "<group>"; };
 		64B6F1441EF1777900A32615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64C8F0D71EF2DDF300FC88D6 /* NSObject+DDView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DDView.h"; sourceTree = "<group>"; };
+		64C8F0D81EF2DDF300FC88D6 /* NSObject+DDView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DDView.m"; sourceTree = "<group>"; };
 		A01F0879C726649248EFA7A7 /* Pods-DataDrivingDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataDrivingDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DataDrivingDemo/Pods-DataDrivingDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		AB89A698A1B4C1395B305A23 /* libPods-DataDrivingDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DataDrivingDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C597DCC412A06947B8B6B4CC /* Pods-DataDrivingDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataDrivingDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DataDrivingDemo/Pods-DataDrivingDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -142,6 +145,8 @@
 		64B6F14D1EF1786F00A32615 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				64C8F0D71EF2DDF300FC88D6 /* NSObject+DDView.h */,
+				64C8F0D81EF2DDF300FC88D6 /* NSObject+DDView.m */,
 				647C056F1EF23073006AADF3 /* NSObject+DDNet.h */,
 				647C05701EF23073006AADF3 /* NSObject+DDNet.m */,
 				647C05731EF25548006AADF3 /* DDNetObject.h */,
@@ -326,6 +331,7 @@
 			files = (
 				647C05791EF26501006AADF3 /* ViewControllerModel.m in Sources */,
 				64B6F1301EF1777900A32615 /* ViewController.m in Sources */,
+				64C8F0D91EF2DDF300FC88D6 /* NSObject+DDView.m in Sources */,
 				647C05711EF23073006AADF3 /* NSObject+DDNet.m in Sources */,
 				64B6F12D1EF1777900A32615 /* AppDelegate.m in Sources */,
 				647C05751EF25548006AADF3 /* DDNetObject.m in Sources */,
