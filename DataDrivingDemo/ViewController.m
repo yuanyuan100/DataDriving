@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "NSObject+DDNet.h"
 
 @interface ViewController ()
 

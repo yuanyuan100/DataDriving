@@ -10,11 +10,6 @@
 
 @protocol DDBase <NSObject>
 
-- (void)add:(id<DDNetResponder>)delegate;
-- (void)remove:(id<DDNetResponder>)delegate;
-- (void)change:(id<DDNetResponder>)before to:(id<DDNetResponder>)after;
-- (BOOL)check:(id<DDNetResponder>)delegate;
-
 @end
 
 //****************************************************************************//

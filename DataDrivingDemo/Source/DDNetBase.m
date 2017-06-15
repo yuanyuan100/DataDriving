@@ -7,6 +7,8 @@
 //
 
 #import "DDNetBase.h"
+#import "NSObject+DDNet.h"
+
 
 @implementation DDNetBase
 @synthesize askNet = _askNet;
@@ -19,6 +21,7 @@
         _askNet = askNet;
         if (_askNet == true) {
             // 主动发拉取数据网络请求
+            
         }
     }
 }

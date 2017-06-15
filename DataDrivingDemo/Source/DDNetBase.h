@@ -25,6 +25,8 @@
  */
 @property (nonatomic, getter=isUploadNet) BOOL uploadNet;
 
+
+
 @end
 //****************************************************************************//
 
@@ -32,29 +34,4 @@
 
 @end
 
-//****************************************************************************//
 
-@protocol DDNetResponder <NSObject>
-
-@required
-/**
- 拉取数据网络请求
- 
- @param model 当前model
- @param response 数据响应的回调
- */
-- (void)ddAskNet:(__kindof DDNetBase *)model response:(id(^)())response;
-
-@optional
-/**
- 发起上传数据网络请求
-
- @param model 当前model
- @param success 上传数据成功的回调
- @param failure 上传数据失败的回调
- */
-- (void)ddUploadNet:(__kindof DDNetBase *)model
-            success:(void(^)())success
-            failure:(void(^)())failure;
-
-@end
