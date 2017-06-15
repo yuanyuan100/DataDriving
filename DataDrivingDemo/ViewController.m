@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "NSObject+DDNet.h"
 #import "ViewControllerModel.h"
+#import "TwoViewController.h"
 
 @interface ViewController () <DDNetResponder>
 @property (nonatomic, strong) ViewControllerModel *model;
@@ -20,7 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.model = [ViewControllerModel new];
-    [self.model dd_add:self];
+//    [self.model dd_add:self];
 }
 
 - (void)ddAskNet:(id)model response:(id (^)(NSDictionary *))response {
@@ -29,7 +30,11 @@
 
 - (IBAction)askNet:(id)sender {
     self.model.DD_AskNet = YES;
-    [self.model dd_remove:self];
+}
+- (IBAction)nextVC:(id)sender {
+    TwoViewController *two = [TwoViewController new];
+    two.model = self.model;
+    [self.navigationController pushViewController:two animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
