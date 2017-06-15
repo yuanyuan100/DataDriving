@@ -21,8 +21,8 @@
     [self.model dd_add:self];
 }
 - (IBAction)askNet:(id)sender {
-    self.model.DD_AskNet = YES;
-//    [self.model dd_remove:self];
+    [self.model dd_pullReAccept];
+    [self.model dd_pull];
 }
 
 - (void)ddAskNet:(id)model response:(id (^)(NSDictionary *))response {
@@ -35,7 +35,7 @@
 }
 
 -(void)dealloc {
-
+    NSLog(@"注销 %s", __FILE__);
 }
 
 /*

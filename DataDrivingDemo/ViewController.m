@@ -20,16 +20,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.model = [ViewControllerModel new];
-    [self.model dd_add:self];
+    self.model = [ViewControllerModel dd_NewAskNet:self];
 }
 
 - (void)ddAskNet:(id)model response:(id (^)(NSDictionary *))response {
     NSLog(@"请求网络数据");
+    [model dd_pullSuAccept];
 }
 
 - (IBAction)askNet:(id)sender {
-    self.model.DD_AskNet = YES;
+    [self.model dd_pull];
 }
 - (IBAction)nextVC:(id)sender {
     TwoViewController *two = [TwoViewController new];
