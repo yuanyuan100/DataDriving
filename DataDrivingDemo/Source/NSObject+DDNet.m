@@ -123,7 +123,7 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
                     [obj.obj ddAskNet:self response:^id(NSDictionary *d) {
                         // 解析字典，在我们的APP内，解析Data:{}
                         //1 提供默认的解析方案
-                        //2.暴露出给一个统一解析的借口
+                        //2.暴露出给一个统一解析的接口
                         //3.每个响应的model都可以重新定制解析方案
                         
                         return self;
@@ -192,7 +192,7 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
     objc_setAssociatedObject(self, NSObjectDD_DelegatesKey, DD_Delegates, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
--(NSMutableArray<DDNetObject *> *)DD_Delegates {
+- (NSMutableArray<DDNetObject *> *)DD_Delegates {
     id delegates = objc_getAssociatedObject(self, NSObjectDD_DelegatesKey);
     if (delegates == nil) {
         delegates = [[NSMutableArray alloc] init];
