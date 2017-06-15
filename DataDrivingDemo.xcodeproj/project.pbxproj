@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		647C05711EF23073006AADF3 /* NSObject+DDNet.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C05701EF23073006AADF3 /* NSObject+DDNet.m */; };
 		647C05751EF25548006AADF3 /* DDNetObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C05741EF25548006AADF3 /* DDNetObject.m */; };
+		647C05791EF26501006AADF3 /* ViewControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C05781EF26501006AADF3 /* ViewControllerModel.m */; };
 		64B6F12A1EF1777900A32615 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 64B6F1291EF1777900A32615 /* main.m */; };
 		64B6F12D1EF1777900A32615 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 64B6F12C1EF1777900A32615 /* AppDelegate.m */; };
 		64B6F1301EF1777900A32615 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64B6F12F1EF1777900A32615 /* ViewController.m */; };
@@ -37,6 +38,8 @@
 		647C05731EF25548006AADF3 /* DDNetObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNetObject.h; sourceTree = "<group>"; };
 		647C05741EF25548006AADF3 /* DDNetObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNetObject.m; sourceTree = "<group>"; };
 		647C05761EF25AFB006AADF3 /* DDNetResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNetResponder.h; sourceTree = "<group>"; };
+		647C05771EF26501006AADF3 /* ViewControllerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerModel.h; sourceTree = "<group>"; };
+		647C05781EF26501006AADF3 /* ViewControllerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerModel.m; sourceTree = "<group>"; };
 		64B6F1251EF1777900A32615 /* DataDrivingDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataDrivingDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64B6F1291EF1777900A32615 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		64B6F12B1EF1777900A32615 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -111,6 +114,8 @@
 				64B6F1361EF1777900A32615 /* LaunchScreen.storyboard */,
 				64B6F1391EF1777900A32615 /* Info.plist */,
 				64B6F1281EF1777900A32615 /* Supporting Files */,
+				647C05771EF26501006AADF3 /* ViewControllerModel.h */,
+				647C05781EF26501006AADF3 /* ViewControllerModel.m */,
 			);
 			path = DataDrivingDemo;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				647C05791EF26501006AADF3 /* ViewControllerModel.m in Sources */,
 				64B6F1301EF1777900A32615 /* ViewController.m in Sources */,
 				647C05711EF23073006AADF3 /* NSObject+DDNet.m in Sources */,
 				64B6F12D1EF1777900A32615 /* AppDelegate.m in Sources */,

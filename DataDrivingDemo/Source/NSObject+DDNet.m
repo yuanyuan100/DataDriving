@@ -21,7 +21,6 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
 @property (nonatomic ,strong) NSMutableArray<DDNetObject *> *DD_Delegates;
 @end
 
-
 @implementation NSObject (DDNet)
 @dynamic DD_AskNet;
 @dynamic DD_UploadNet;
@@ -63,13 +62,14 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
 }
 
 
-- (void)setDD_askNet:(BOOL)DD_AskNet {
+- (void)setDD_AskNet:(BOOL)DD_AskNet {
     if (self.isDD_AskNet != DD_AskNet) {
         objc_setAssociatedObject(self, NSObjectDD_askNetKey, [NSNumber numberWithBool:DD_AskNet], OBJC_ASSOCIATION_ASSIGN);
         if (DD_AskNet == true) {
             //主动发起拉取数据网络请求
             for (DDNetObject *obj in self.DD_Delegates) {
                 if (obj.isFlagAsk) {
+                    self.DD_AskNet = NO;
                     [obj.obj ddAskNet:self response:^id(NSDictionary *d) {
                         // 解析字典，在我们的APP内，解析Data:{}
                         
@@ -94,6 +94,7 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
             // 主动发起上传数据网络请求
             for (DDNetObject *obj in self.DD_Delegates) {
                 if (obj.isFlagUpload) {
+                    self.DD_UploadNet = NO;
                     [obj.obj ddUploadNet:self success:^{
                         // 上传成功
                         
@@ -113,10 +114,15 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
     return [(NSNumber *)uploadNet boolValue];
 }
 
+- (void)setDD_Delegates:(NSMutableArray<DDNetObject *> *)DD_Delegates {
+    objc_setAssociatedObject(self, NSObjectDD_DelegatesKey, DD_Delegates, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 -(NSMutableArray<DDNetObject *> *)DD_Delegates {
     id delegates = objc_getAssociatedObject(self, NSObjectDD_DelegatesKey);
     if (delegates == nil) {
         delegates = [[NSMutableArray alloc] init];
+        self.DD_Delegates = delegates;
     }
     return delegates;
 }
