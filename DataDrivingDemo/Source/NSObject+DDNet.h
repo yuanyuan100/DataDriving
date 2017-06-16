@@ -8,7 +8,10 @@
 // 数据驱动网络请求
 
 #import <Foundation/Foundation.h>
+
 #import "DDNetResponder.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (DDNet)
 
@@ -45,3 +48,5 @@
 - (BOOL)dd_check:(id<DDNetResponder>)delegate;
 
 @end
+
+NS_ASSUME_NONNULL_END

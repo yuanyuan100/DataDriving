@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface ViewControllerModel : NSObject
-
+@property (nonatomic, copy) NSString *text;
 @end

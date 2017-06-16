@@ -8,6 +8,7 @@
 
 #import "TwoViewController.h"
 #import "NSObject+DDNet.h"
+#import "NSObject+DDView.h"
 
 @interface TwoViewController () <DDNetResponder>
 
@@ -21,7 +22,6 @@
     [self.model dd_add:self];
 }
 - (IBAction)askNet:(id)sender {
-    [self.model dd_pullReAccept];
     [self.model dd_pull];
 }
 

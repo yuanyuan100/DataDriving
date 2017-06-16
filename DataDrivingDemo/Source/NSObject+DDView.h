@@ -9,6 +9,59 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+#ifndef DD_EXPORT
+#define DD_EXPORT extern
+#endif
+
+typedef NSString * DDKeyValueDataFlowKey NS_STRING_ENUM;
+
+DD_EXPORT DDKeyValueDataFlowKey const DDKeyValueDataWillFlowKey;
+DD_EXPORT DDKeyValueDataFlowKey const DDKeyValueDataDidFlowKey;
+DD_EXPORT DDKeyValueDataFlowKey const DDKeyValueDataFlowNewKey;
+DD_EXPORT DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey;
+
+
 @interface NSObject (DDView)
 
+/**
+ 将object 数据对象 与 该类的实例path属性双向绑定， 双向属性名称一致
+
+ @param object 被绑定的对象
+ @param path 共同的属性名称，属性类型必须一致
+ @param positive 数据从model流向viewModel
+ @param reverse 数据从viewModel流向model
+ */
+- (void)dd_bindObject:(nonnull id)object bothPath:(nonnull NSString *)path positive:(nullable void(^)(NSDictionary<DDKeyValueDataFlowKey, id> *change))positive reverse:(nullable void(^)(NSDictionary<DDKeyValueDataFlowKey, id> *change))reverse;
+
+/**
+ 将object 数据对象 与 该类的实例path属性双向绑定，双向属性名称不一致
+
+ @param object 被绑定的对象
+ @param oPath 被绑定对象的属性名称
+ @param mPath 主动绑定对象的属性名称
+ @param positive 数据从model流向viewModel
+ @param reverse 数据从viewModel流向model
+ */
+- (void)dd_bindObject:(id)object oPath:(NSString *)oPath mPath:(NSString *)mPath positive:(nullable void(^)(NSDictionary<DDKeyValueDataFlowKey, id> *change))positive reverse:(nullable void(^)(NSDictionary<DDKeyValueDataFlowKey, id> *change))reverse;
+
+/**
+ 移除被绑定对象 object
+
+ @param object 移除被绑定对象
+ @param path 被绑定对象的属性名称
+ */
+- (void)dd_removeBind:(id)object bothPath:(NSString *)path;
+
+/**
+ 移除双向绑定对象 object
+
+ @param object 被绑定对象
+ @param oPath 移除被绑定对象
+ @param mPath 移除主动绑定对象
+ */
+- (void)dd_removeBind:(id)object oPath:(NSString *)oPath mPath:(NSString *)mPath;
 @end
+
+NS_ASSUME_NONNULL_END
