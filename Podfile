@@ -1,3 +1,3 @@
 target ‘DataDrivingDemo’ do
-    pod 'KVOController'
+#    pod 'KVOController'
 end
