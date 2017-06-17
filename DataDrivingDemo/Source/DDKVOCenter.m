@@ -39,6 +39,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)removeobserved:(nonnull id)observed keyPath:(nonnull NSString *)keytPath {
+    NSAssert(nil != observed && 0 != keytPath.length, @"removeobserved:%@ keyPath:%@", observed, keytPath);
+    
+    if (nil == observed || 0 == keytPath.length) {
+        return;
+    }
     [observed removeObserver:self forKeyPath:keytPath];
 }
 @end
