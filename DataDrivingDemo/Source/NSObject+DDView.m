@@ -72,7 +72,7 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
              positive:(nullable BOOL (^)(NSDictionary<DDKeyValueDataFlowKey,id> *))positive
               reverse:(nullable BOOL (^)(NSDictionary<DDKeyValueDataFlowKey,id> *))reverse
 {
-    [self dd_bindObject:object oPath:oPath mPath:mPath positive:positive reverse:reverse showNow:true];
+    [self dd_bindObject:object oPath:oPath mPath:mPath positive:positive reverse:reverse showNow:false];
 }
 
 - (void)dd_bindObject:(id)object

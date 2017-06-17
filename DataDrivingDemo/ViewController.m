@@ -27,7 +27,7 @@
 //    self.model = [ViewControllerModel dd_NewAskNet:self];
     self.model = [ViewControllerModel new];
     self.model.text = @"pyy";
-    [self.model dd_bindObject:self.labelT bothPath:@"text" positive:nil reverse:nil showNow:NO];
+    [self.model dd_bindObject:self.labelT bothPath:@"text" positive:nil reverse:nil showNow:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
