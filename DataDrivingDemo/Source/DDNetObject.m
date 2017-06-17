@@ -8,6 +8,8 @@
 
 #import "DDNetObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation DDNetObject
 + (instancetype)newObject:(id<DDNetResponder>)delegate {
     NSAssert(delegate, @"delegate can't be nil");
@@ -24,3 +26,5 @@
     return obj;
 }
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,7 @@
 #import "NSObject+DDView.h"
 
 @interface TwoViewController () <DDNetResponder>
+@property (weak, nonatomic) IBOutlet UILabel *labelTwo;
 
 @end
 
@@ -19,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.model dd_bindObject:self.labelTwo bothPath:@"text" positive:nil reverse:nil];
     [self.model dd_add:self];
 }
 - (IBAction)askNet:(id)sender {
@@ -27,6 +29,7 @@
 
 - (void)ddAskNet:(id)model response:(id (^)(NSDictionary *))response {
     NSLog(@"two");
+    self.model.text = @"chen jing";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,6 +39,7 @@
 
 -(void)dealloc {
     NSLog(@"注销 %s", __FILE__);
+    [self.model dd_removeBind:self.labelTwo bothPath:@"text"];
 }
 
 /*

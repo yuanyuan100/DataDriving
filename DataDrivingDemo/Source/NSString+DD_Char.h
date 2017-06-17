@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSString (DD_Char)
 @property (readonly) const char * dd_getChar;
 @end
+
+NS_ASSUME_NONNULL_END
