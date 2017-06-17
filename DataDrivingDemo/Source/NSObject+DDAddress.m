@@ -8,8 +8,12 @@
 
 #import "NSObject+DDAddress.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation NSObject (DDAddress)
 - (NSString *)dd_getAddress {
     return [NSString stringWithFormat:@"%p", self];
 }
 @end
+
+NS_ASSUME_NONNULL_END
