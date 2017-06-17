@@ -8,6 +8,7 @@
 
 #import "NSObject+DDView.h"
 #import "NSString+DDSet.h"
+#import "NSString+DD_Char.h"
 
 #import <objc/runtime.h>
 
@@ -69,12 +70,15 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
                        });
         }
         
+        
+        Ivar ivar = class_getInstanceVariable([weakObject class], oPath.dd_instanceVariable.dd_getChar);
         // 观察到model 属性发生变化
-        SEL oSel = NSSelectorFromString(oPath.dd_appendingSet);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [weakObject performSelector:oSel withObject:change[NSKeyValueChangeNewKey]];
-#pragma clang diagnostic pop
+        if (ivar == NULL) {
+            [weakObject setValue:change[NSKeyValueChangeNewKey] forKey:oPath];
+        } else {
+            [weakObject setValue:change[NSKeyValueChangeNewKey] forKey:oPath.dd_instanceVariable];
+        }
+        
         if (positive) {
             positive(@{
                        DDKeyValueDataDidFlowKey:@true,
@@ -83,10 +87,8 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
                        });
         }
     }];
-    [self.DD_KVOCenterSet setObject:mKvoCenter forKey:mPath];
+    [self.DD_KVOCenterSet setObject:mKvoCenter forKey:[mPath dd_addDiff:DDSetDiffM]];
     
-//    SEL mSel = NSSelectorFromString(mPath.dd_appendingSet);
-//    [self performSelector:mSel withObject:@"44444444"];
     
     DDKVOCenter *oKvoCenter = [DDKVOCenter new];
     [oKvoCenter observed:object keyPath:oPath options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
@@ -98,16 +100,14 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
                        DDKeyValueDataFlowOldKey:change[NSKeyValueChangeOldKey]
                        });
         }
-        
+        Ivar ivar = class_getInstanceVariable([weakSelf class], mPath.dd_instanceVariable.dd_getChar);
         // 观察到object 属性发生变化
-//        SEL mSel = NSSelectorFromString(mPath.dd_appendingSet);
-//#pragma clang diagnostic push
-//#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-//        if ([weakSelf respondsToSelector:mSel]) {
-//            [weakSelf performSelector:mSel withObject:change[NSKeyValueChangeNewKey]];
-//        }
+        if (ivar == NULL) {
+            [weakSelf setValue:change[NSKeyValueChangeNewKey] forKey:mPath];
+        } else {
+            [weakSelf setValue:change[NSKeyValueChangeNewKey] forKey:mPath.dd_instanceVariable];
+        }
         
-        [weakSelf setValue:change[NSKeyValueChangeNewKey] forKey:[NSString stringWithFormat:@"_%@", mPath]];
 #pragma clang diagnostic pop
         if (reverse) {
             reverse(@{
@@ -118,7 +118,7 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
         }
         
     }];
-    [self.DD_KVOCenterSet setObject:oKvoCenter forKey:oPath];
+    [self.DD_KVOCenterSet setObject:oKvoCenter forKey:[oPath dd_addDiff:DDSetDiffO]];
     
 }
 
@@ -135,11 +135,11 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
         return;
     }
     
-    [self.DD_KVOCenterSet[oPath] removeobserved:object keyPath:oPath];
-    [self.DD_KVOCenterSet removeObjectForKey:oPath];
+    [self.DD_KVOCenterSet[[oPath dd_addDiff:DDSetDiffO]] removeobserved:object keyPath:oPath];
+    [self.DD_KVOCenterSet removeObjectForKey:[oPath dd_addDiff:DDSetDiffO]];
     
-    [self.DD_KVOCenterSet[mPath] removeobserved:self keyPath:mPath];
-    [self.DD_KVOCenterSet removeObjectForKey:mPath];
+    [self.DD_KVOCenterSet[[mPath dd_addDiff:DDSetDiffM]] removeobserved:self keyPath:mPath];
+    [self.DD_KVOCenterSet removeObjectForKey:[mPath dd_addDiff:DDSetDiffM]];
 }
 
 #pragma mark - setter or getter

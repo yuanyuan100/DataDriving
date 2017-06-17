@@ -33,7 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)observeValueForKeyPath:(nullable NSString *)keyPath ofObject:(nullable id)object change:(nullable NSDictionary<NSKeyValueChangeKey,id> *)change context:(nullable void *)context {
-//    [object removeObserver:self forKeyPath:keyPath];
     if (self.block) {
         self.block(self, object, change);
     }

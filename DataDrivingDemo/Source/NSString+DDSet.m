@@ -13,4 +13,20 @@
     NSString *up = self.capitalizedString;
     return [NSString stringWithFormat:@"set%@:", up];
 }
+
+- (NSString *)dd_addDiff:(DDSetDiff)diff {
+    switch (diff) {
+        case DDSetDiffM:
+            return [@"M" stringByAppendingString:self];
+        case DDSetDiffO:
+            return [@"O" stringByAppendingString:self];
+        default:
+            NSAssert(NO, @"必须满足枚举");
+            return self;
+    }
+}
+
+- (NSString *)dd_instanceVariable {
+    return [@"_" stringByAppendingString:self];
+}
 @end
