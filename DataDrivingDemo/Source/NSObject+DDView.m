@@ -111,6 +111,15 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
         }
     }
     
+    // 判断字典中是否已经存在绑定
+    // 只需要任意查看被绑定者或model 的KVOCenter是否存在字典中即可
+    // 找到被绑定者
+    NSString *o = [[oPath dd_addressObject:object changed:self] dd_addDiff:DDSetDiffO];
+    if (nil != [self.DD_KVOCenterSet objectForKey:o]) {
+        NSAssert(NO, @"%@已经绑定在%@", object, self);
+        return;
+    }
+    
     // 绑定时立即赋值
     if (true == showNow) {
         id mValue = [self valueForKey:mPath];
@@ -189,10 +198,12 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
         return;
     }
     
+    // 移除被绑定者
     NSString *o = [[oPath dd_addressObject:object changed:self] dd_addDiff:DDSetDiffO];
     [self.DD_KVOCenterSet[o] removeobserved:object keyPath:oPath];
     [self.DD_KVOCenterSet removeObjectForKey:o];
     
+    // 移除model
     NSString *m = [[mPath dd_addressObject:self changed:object] dd_addDiff:DDSetDiffM];
     [self.DD_KVOCenterSet[m] removeobserved:self keyPath:mPath];
     [self.DD_KVOCenterSet removeObjectForKey:m];

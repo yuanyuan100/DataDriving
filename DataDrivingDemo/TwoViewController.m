@@ -29,6 +29,8 @@
         weakSelf.labelTwo;
         return YES;
     }];
+    
+    [self.model dd_bindObject:self.labelTwo bothPath:@"text"];
     [self.model dd_add:self];
 }
 - (IBAction)askNet:(id)sender {
