@@ -20,7 +20,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.model dd_bindObject:self.labelTwo bothPath:@"text" positive:nil reverse:nil];
+    
+    __weak typeof(self) weakSelf = self;
+    [self.model dd_bindObject:self.labelTwo bothPath:@"text" positive:^BOOL(NSDictionary<DDKeyValueDataFlowKey,id> * _Nonnull change) {
+        weakSelf.model;
+        return YES;
+    } reverse:^BOOL(NSDictionary<DDKeyValueDataFlowKey,id> * _Nonnull change) {
+        weakSelf.labelTwo;
+        return YES;
+    }];
     [self.model dd_add:self];
 }
 - (IBAction)askNet:(id)sender {

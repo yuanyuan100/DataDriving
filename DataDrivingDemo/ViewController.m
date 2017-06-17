@@ -26,8 +26,8 @@
     // Do any additional setup after loading the view, typically from a nib.
 //    self.model = [ViewControllerModel dd_NewAskNet:self];
     self.model = [ViewControllerModel new];
-    
-    [self.model dd_bindObject:self.labelT bothPath:@"text" positive:nil reverse:nil];
+    self.model.text = @"pyy";
+    [self.model dd_bindObject:self.labelT bothPath:@"text" positive:nil reverse:nil showNow:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -33,6 +33,22 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
 @implementation NSObject (DDView)
 
 #pragma mark - 添加观察者
+- (void)dd_bindObject:(id)object bothPath:(NSString *)path {
+    [self dd_bindObject:object bothPath:path positive:nil reverse:nil];
+}
+
+- (void)dd_bindObject:(id)object bothPath:(NSString *)path showNow:(BOOL)showNow {
+    [self dd_bindObject:object bothPath:path positive:nil reverse:nil showNow:showNow];
+}
+
+- (void)dd_bindObject:(id)object oPath:(NSString *)oPath mPath:(NSString *)mPath {
+    [self dd_bindObject:object oPath:oPath mPath:mPath positive:nil reverse:nil];
+}
+
+- (void)dd_bindObject:(id)object oPath:(NSString *)oPath mPath:(NSString *)mPath showNow:(BOOL)showNow {
+    [self dd_bindObject:object oPath:oPath mPath:mPath positive:nil reverse:nil showNow:showNow];
+}
+
 - (void)dd_bindObject:(id)object
              bothPath:(NSString *)path
              positive:(nullable BOOL (^)(NSDictionary<DDKeyValueDataFlowKey,id> *))positive
@@ -42,10 +58,29 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
 }
 
 - (void)dd_bindObject:(id)object
+             bothPath:(NSString *)path
+             positive:(nullable BOOL (^)(NSDictionary<DDKeyValueDataFlowKey,id> *))positive
+              reverse:(nullable BOOL (^)(NSDictionary<DDKeyValueDataFlowKey,id> *))reverse
+              showNow:(BOOL)showNow
+{
+    [self dd_bindObject:object oPath:path mPath:path positive:positive reverse:reverse showNow:showNow];
+}
+
+- (void)dd_bindObject:(id)object
                 oPath:(NSString *)oPath
                 mPath:(NSString *)mPath
              positive:(nullable BOOL (^)(NSDictionary<DDKeyValueDataFlowKey,id> *))positive
               reverse:(nullable BOOL (^)(NSDictionary<DDKeyValueDataFlowKey,id> *))reverse
+{
+    [self dd_bindObject:object oPath:oPath mPath:mPath positive:positive reverse:reverse showNow:true];
+}
+
+- (void)dd_bindObject:(id)object
+                oPath:(NSString *)oPath
+                mPath:(NSString *)mPath
+             positive:(nullable BOOL (^)(NSDictionary<DDKeyValueDataFlowKey,id> *))positive
+              reverse:(nullable BOOL (^)(NSDictionary<DDKeyValueDataFlowKey,id> *))reverse
+              showNow:(BOOL)showNow
 {
     NSAssert(nil != object && 0 != oPath.length && 0 != mPath.length, @"dd_bindObject:%@\
              oPath:%@\
@@ -73,6 +108,15 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
         if (false == [object respondsToSelector:oPath.dd_propertyGetMethod]) {
             NSAssert(false, @"%@ 不满足get方法", oPath);
             return;
+        }
+    }
+    
+    // 绑定时立即赋值
+    if (true == showNow) {
+        id mValue = [self valueForKey:mPath];
+        NSAssert(nil != mValue, @"%@的%@属性为nil", self, mPath);
+        if (nil != mValue) {
+            [object setValue:mValue forKey:oPath];
         }
     }
     

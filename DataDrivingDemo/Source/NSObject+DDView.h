@@ -24,6 +24,10 @@ DD_EXPORT DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey;
 
 
 @interface NSObject (DDView)
+- (void)dd_bindObject:(nonnull id)object bothPath:(nonnull NSString *)path;
+- (void)dd_bindObject:(nonnull id)object bothPath:(nonnull NSString *)path showNow:(BOOL)showNow;
+- (void)dd_bindObject:(id)object oPath:(NSString *)oPath mPath:(NSString *)mPath;
+- (void)dd_bindObject:(id)object oPath:(NSString *)oPath mPath:(NSString *)mPath showNow:(BOOL)showNow;
 
 /**
  将object 数据对象 与 该类的实例path属性双向绑定， 双向属性名称一致
@@ -35,6 +39,8 @@ DD_EXPORT DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey;
  */
 - (void)dd_bindObject:(nonnull id)object bothPath:(nonnull NSString *)path positive:(nullable BOOL(^)(NSDictionary<DDKeyValueDataFlowKey, id> *change))positive reverse:(nullable BOOL(^)(NSDictionary<DDKeyValueDataFlowKey, id> *change))reverse;
 
+- (void)dd_bindObject:(nonnull id)object bothPath:(nonnull NSString *)path positive:(nullable BOOL(^)(NSDictionary<DDKeyValueDataFlowKey, id> *change))positive reverse:(nullable BOOL(^)(NSDictionary<DDKeyValueDataFlowKey, id> *change))reverse showNow:(BOOL)showNow;
+
 /**
  将object 数据对象 与 该类的实例path属性双向绑定，双向属性名称不一致
 
@@ -45,6 +51,8 @@ DD_EXPORT DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey;
  @param reverse 数据从viewModel流向model, if return NO 则反向绑定失效, default YES
  */
 - (void)dd_bindObject:(id)object oPath:(NSString *)oPath mPath:(NSString *)mPath positive:(nullable BOOL(^)(NSDictionary<DDKeyValueDataFlowKey, id> *change))positive reverse:(nullable BOOL(^)(NSDictionary<DDKeyValueDataFlowKey, id> *change))reverse;
+
+- (void)dd_bindObject:(id)object oPath:(NSString *)oPath mPath:(NSString *)mPath positive:(nullable BOOL(^)(NSDictionary<DDKeyValueDataFlowKey, id> *change))positive reverse:(nullable BOOL(^)(NSDictionary<DDKeyValueDataFlowKey, id> *change))reverse showNow:(BOOL)showNow;
 
 /**
  移除被绑定对象 object
