@@ -3,13 +3,13 @@
 > 
 > 微信:quanquan_pyy
 
-###背景
+### 背景
 
 在MVC下，数据间的通信需要写大量的回调，例如block，delegate，导致数据的流动方向不确定性。APP中大量的bug也是因为数据的不确定性造成的，解决相应bug需要耗费精力定位数据出错的地方。使用DataDriving可以节省大量写回调的代码，以及更加容易确定数据的流动，只需要确定是什么事件导致数据发生改变，以及快速的查找与之绑定的viewModel或者UI控件。
 
-###原理
+### 原理
 
-######DataDriving分为两个部分
+###### DataDriving分为两个部分
 
 - 网络 
 
@@ -21,12 +21,12 @@
         ![流程图](https://github.com/yuanyuan100/DataDriving/blob/master/1923469944.jpg)
         将viewmodel(或者View控件)与model的响应属性(数据)绑定，也就是没个model都维护一个字典，字典<KVO承载类:唯一识别>，每绑定一组，则初始化两个KVO承载类，并添加到字典中，KVO承载类观察变化，若发生变化则通过KVO给响应的属性赋值(双向)
              
-###示例
+### 示例
 
-###导入方案
+### 导入方案
 
-###注意事项
+### 注意事项
 
-###License
+### License
 
 MIT
