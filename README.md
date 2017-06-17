@@ -19,7 +19,7 @@
 
 - ViewModel
 
-
+  ![viewmodel原理图](https://github.com/yuanyuan100/DataDriving/blob/master/722294338.jpg)
 
     将viewmodel(或者View控件)与model的响应属性(数据)绑定，也就是没个model都维护一个字典，字典<KVO承载类:唯一识别>，每绑定一组，则初始化两个KVO承载类，并添加到字典中，KVO承载类观察变化，若发生变化则通过KVO给响应的属性赋值(双向)
              
