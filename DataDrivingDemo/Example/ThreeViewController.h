@@ -1,8 +1,8 @@
 //
-//  TwoViewController.h
+//  ThreeViewController.h
 //  DataDrivingDemo
 //
-//  Created by Mr.Pyy on 2017/6/15.
+//  Created by Mr.PYY on 17/6/18.
 //  Copyright © 2017年 Mr.PYY. All rights reserved.
 //
 
@@ -10,6 +10,6 @@
 
 @class OneModel;
 
-@interface TwoViewController : UIViewController
+@interface ThreeViewController : UIViewController
 @property (nonatomic, strong) OneModel *model;
 @end

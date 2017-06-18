@@ -20,6 +20,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 static void *NSObjectDD_ViewKVOCenterSet = &NSObjectDD_ViewKVOCenterSet;
+static void *NSObjectDD_SelfFlag = &NSObjectDD_SelfFlag;
 
 DDKeyValueDataFlowKey const DDKeyValueDataWillFlowKey     = @"will";
 DDKeyValueDataFlowKey const DDKeyValueDataDidFlowKey      = @"did";
@@ -28,6 +29,11 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
 
 @interface NSObject ()
 @property (nonatomic, strong) NSMutableDictionary<NSString*, DDKVOCenter *> *DD_KVOCenterSet;
+
+/**
+ 改变是否来自 自己先改变被绑定者，被绑定者的改变又来改变自己。if YES 自己不在改变 防止循环KVO
+ */
+@property (nonatomic, getter=isDD_SelfFlag) BOOL DD_SelfFlag;
 @end
 
 @implementation NSObject (DDView)
@@ -149,7 +155,7 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
 - (void)addObserverd:(id)observerd oPath:(NSString *)oPath changed:(id)changed cPath:(NSString *)cPath block:(nullable BOOL (^)(NSDictionary<DDKeyValueDataFlowKey,id> *))block diff:(DDSetDiff)diff {
     
     __weak typeof(changed) weakChanged = changed;
-    
+    __weak typeof(self) weakSelf = self;
     DDKVOCenter *kvoCenter = [DDKVOCenter new];
     [kvoCenter observed:observerd keyPath:oPath options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         // 是否执行KVC赋值操作
@@ -162,15 +168,13 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
                                    DDKeyValueDataFlowOldKey:change[NSKeyValueChangeOldKey]
                                    });
         }
-        
         if (true == executeKVC) {
-            // 查找是否有属性同名的成员变量，如果有成员变量，则kvc成员变量，防止循环KVO
-            Ivar ivar = class_getInstanceVariable([weakChanged class], cPath.dd_instanceVariable.dd_getChar);
             // 观察到object 属性发生变化
-            if (ivar == NULL) {
+            if (false == [weakChanged isEqual:weakSelf] || false == self.isDD_SelfFlag) {
+                self.DD_SelfFlag = true;
                 [weakChanged setValue:change[NSKeyValueChangeNewKey] forKey:cPath];
             } else {
-                [weakChanged setValue:change[NSKeyValueChangeNewKey] forKey:cPath.dd_instanceVariable];
+                self.DD_SelfFlag = false;
             }
             
             if (block) {
@@ -221,6 +225,17 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
         self.DD_KVOCenterSet = set;
     }
     return set;
+}
+
+- (void)setDD_SelfFlag:(BOOL)DD_SelfFlag {
+    if (self.isDD_SelfFlag != DD_SelfFlag) {
+        objc_setAssociatedObject(self, NSObjectDD_SelfFlag, [NSNumber numberWithBool:DD_SelfFlag], OBJC_ASSOCIATION_ASSIGN);
+    }
+}
+
+- (BOOL)isDD_SelfFlag {
+    id flag = objc_getAssociatedObject(self, NSObjectDD_SelfFlag);
+    return [(NSNumber *)flag boolValue];
 }
 
 @end

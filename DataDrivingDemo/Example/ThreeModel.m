@@ -1,13 +1,13 @@
 //
-//  DDNetParse+def.h
+//  ThreeModel.m
 //  DataDrivingDemo
 //
 //  Created by Mr.PYY on 17/6/18.
 //  Copyright © 2017年 Mr.PYY. All rights reserved.
 //
 
-#import "DDNetParse.h"
+#import "ThreeModel.h"
 
-@interface DDNetParse (def)
+@implementation ThreeModel
 
 @end
