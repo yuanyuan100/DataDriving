@@ -10,6 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, DDArrayOperation) {
+    DDArrayOperationAdd,
+    DDArrayOperationRemove,
+    DDArrayOperationReplace,
+};
+
 @protocol DDNetResponder <NSObject>
 
 @required
@@ -19,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param model 当前model
  @param response 数据响应的回调
  */
-- (void)ddAskNet:(id)model response:(id(^)(NSDictionary *d))response;
+- (void)ddAskNet:(id)model response:(id(^)(id json))response;
 
 @optional
 /**
@@ -33,6 +39,16 @@ NS_ASSUME_NONNULL_BEGIN
             success:(void(^)())success
             failure:(void(^)())failure;
 
+
+
+/**
+ 针对model中包含数组的操作
+
+ @param operation 操作类型
+ @param indexS 被同一类型操作的Index 的数组集合, 二者任意传一类
+ @param modelS 被同一类型操作的元素   的数组集合, 二者任意传一类
+ */
+- (void)ddOperation:(DDArrayOperation)operation indexS:(NSArray<NSNumber *> *)indexS modelS:(NSArray *)modelS;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (DD_Char)
 @property (readonly) const char * dd_getChar;
++ (NSString *)dd_getString:(const char *)cStr;
 @end
 
 NS_ASSUME_NONNULL_END

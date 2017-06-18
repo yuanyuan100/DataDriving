@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		647093651EF61DEA003DB77E /* DDNetParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 647093641EF61DEA003DB77E /* DDNetParse.m */; };
+		647093711EF623EB003DB77E /* DDNetParse+def.m in Sources */ = {isa = PBXBuildFile; fileRef = 647093701EF623EB003DB77E /* DDNetParse+def.m */; };
 		647C05711EF23073006AADF3 /* NSObject+DDNet.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C05701EF23073006AADF3 /* NSObject+DDNet.m */; };
 		647C05751EF25548006AADF3 /* DDNetObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C05741EF25548006AADF3 /* DDNetObject.m */; };
 		647C05791EF26501006AADF3 /* ViewControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C05781EF26501006AADF3 /* ViewControllerModel.m */; };
@@ -38,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		647093631EF61DEA003DB77E /* DDNetParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNetParse.h; sourceTree = "<group>"; };
+		647093641EF61DEA003DB77E /* DDNetParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNetParse.m; sourceTree = "<group>"; };
+		6470936F1EF623EB003DB77E /* DDNetParse+def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DDNetParse+def.h"; sourceTree = "<group>"; };
+		647093701EF623EB003DB77E /* DDNetParse+def.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DDNetParse+def.m"; sourceTree = "<group>"; };
 		647C056F1EF23073006AADF3 /* NSObject+DDNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DDNet.h"; sourceTree = "<group>"; };
 		647C05701EF23073006AADF3 /* NSObject+DDNet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DDNet.m"; sourceTree = "<group>"; };
 		647C05731EF25548006AADF3 /* DDNetObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNetObject.h; sourceTree = "<group>"; };
@@ -118,6 +124,8 @@
 		64B6F1271EF1777900A32615 /* DataDrivingDemo */ = {
 			isa = PBXGroup;
 			children = (
+				6470936F1EF623EB003DB77E /* DDNetParse+def.h */,
+				647093701EF623EB003DB77E /* DDNetParse+def.m */,
 				64B6F14D1EF1786F00A32615 /* Source */,
 				64B6F12B1EF1777900A32615 /* AppDelegate.h */,
 				64B6F12C1EF1777900A32615 /* AppDelegate.m */,
@@ -172,6 +180,8 @@
 				64DE713A1EF43BD700B30EC1 /* NSString+DDSet.m */,
 				647D60651EF4D537000ADF7C /* NSObject+DDAddress.h */,
 				647D60661EF4D537000ADF7C /* NSObject+DDAddress.m */,
+				647093631EF61DEA003DB77E /* DDNetParse.h */,
+				647093641EF61DEA003DB77E /* DDNetParse.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -354,6 +364,7 @@
 				64B6F1301EF1777900A32615 /* ViewController.m in Sources */,
 				64C8F0D91EF2DDF300FC88D6 /* NSObject+DDView.m in Sources */,
 				647D60611EF4B5BC000ADF7C /* NSString+DD_Char.m in Sources */,
+				647093651EF61DEA003DB77E /* DDNetParse.m in Sources */,
 				64DE713B1EF43BD700B30EC1 /* NSString+DDSet.m in Sources */,
 				647C05711EF23073006AADF3 /* NSObject+DDNet.m in Sources */,
 				64B6F12D1EF1777900A32615 /* AppDelegate.m in Sources */,
@@ -361,6 +372,7 @@
 				647C05751EF25548006AADF3 /* DDNetObject.m in Sources */,
 				647C05831EF26F37006AADF3 /* TwoViewController.m in Sources */,
 				64B6F12A1EF1777900A32615 /* main.m in Sources */,
+				647093711EF623EB003DB77E /* DDNetParse+def.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

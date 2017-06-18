@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
     if ([delegate respondsToSelector:@selector(ddUploadNet:success:failure:)]) {
         obj.flagUpload = true;
     }
+    if ([delegate respondsToSelector:@selector(ddOperation:indexS:modelS:)]) {
+        obj.flagArray = true;
+    }
+    
     obj.obj = delegate;
     
     return obj;

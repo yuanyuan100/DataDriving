@@ -10,6 +10,8 @@
 #import "NSObject+DDNet.h"
 #import "NSObject+DDView.h"
 
+
+
 @interface TwoViewController () <DDNetResponder>
 @property (weak, nonatomic) IBOutlet UILabel *labelTwo;
 
@@ -30,14 +32,13 @@
         return YES;
     }];
     
-    [self.model dd_bindObject:self.labelTwo bothPath:@"text"];
     [self.model dd_add:self];
 }
 - (IBAction)askNet:(id)sender {
     [self.model dd_pull];
 }
 
-- (void)ddAskNet:(id)model response:(id (^)(NSDictionary *))response {
+- (void)ddAskNet:(id)model response:(id (^)(id))response {
     NSLog(@"two");
     self.model.text = @"chen jing";
 }

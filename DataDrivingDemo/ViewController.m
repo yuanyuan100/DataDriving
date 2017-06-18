@@ -40,7 +40,10 @@
     [self.model dd_remove:self];
 }
 
-- (void)ddAskNet:(id)model response:(id (^)(NSDictionary *))response {
+- (void)ddAskNet:(id)model response:(id (^)(id))response {
+    
+    response(@{@"text": @"宝宝"});
+    
     NSLog(@"请求网络数据");
 }
 

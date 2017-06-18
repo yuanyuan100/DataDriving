@@ -8,6 +8,12 @@
 
 #import "ViewControllerModel.h"
 
-@implementation ViewControllerModel
+#import "NSObject+DDNet.h"
 
+#import <YYModel/YYModel.h>
+
+@implementation ViewControllerModel
+//- (void)dd_customParse:(id)json {
+//    [self yy_modelSetWithJSON:json];
+//}
 @end

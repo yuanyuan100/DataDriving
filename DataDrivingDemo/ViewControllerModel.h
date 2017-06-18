@@ -10,4 +10,5 @@
 
 @interface ViewControllerModel : NSObject
 @property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy) NSArray<ViewControllerModel *> *array;
 @end

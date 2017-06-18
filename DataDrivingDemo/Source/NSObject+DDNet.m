@@ -12,6 +12,8 @@
 
 #import "DDNetObject.h"
 
+#import "DDNetParse.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +21,14 @@ static void *NSObjectDD_askNetKey = &NSObjectDD_askNetKey;
 static void *NSObjectDD_askNetFlagKey = &NSObjectDD_askNetFlagKey;
 static void *NSObjectDD_uploadNetKey = &NSObjectDD_uploadNetKey;
 static void *NSObjectDD_uploadFlagNetKey = &NSObjectDD_uploadFlagNetKey;
+static void *NSObjectDD_OperationKey = &NSObjectDD_OperationKey;
+static void *NSObjectDD_OperationtFlagKey = &NSObjectDD_OperationtFlagKey;
 static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
+
+static void *NSObjectdd_OperationKey = &NSObjectdd_OperationKey;
+static void *NSObjectdd_indexSKey = &NSObjectdd_indexSKey;
+static void *NSObjectdd_modelSKey = &NSObjectdd_modelSKey;
+
 
 @interface NSObject ()
 @property (nonatomic ,strong) NSMutableArray<DDNetObject *> *DD_Delegates;
@@ -33,9 +42,29 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
  */
 @property (nonatomic, getter=isDD_UploadNet) BOOL DD_UploadNet;
 @property (nonatomic, getter=isDD_UploadNetFlag) BOOL DD_UploadNetFlag;
+
+/**
+ 更新数组开关
+ */
+@property (nonatomic, getter=isDD_Operation) BOOL DD_Operation;
+/**
+ 更新数字开关的是否启用的标识
+ */
+@property (nonatomic, getter=isDD_OperationtFlag) BOOL DD_OperationtFlag;
+
+
+/**
+ 数组操作添加的相关属性（存储属性）
+ */
+@property (nonatomic, assign) DDArrayOperation dd_operation;
+@property (nonatomic, copy) NSArray<NSNumber *> *dd_indexS;
+@property (nonatomic, copy) NSArray *dd_modelS;
 @end
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
 @implementation NSObject (DDNet)
+#pragma clang diagnostic pop
 
 #pragma mark - 便利的初始化方法
 + (instancetype)dd_NewAskNet:(id<DDNetResponder>)delegate {
@@ -131,12 +160,20 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
             //主动发起拉取数据网络请求
             for (DDNetObject *obj in self.DD_Delegates) {
                 if (obj.isFlagAsk) {
-                    [obj.obj ddAskNet:self response:^id(NSDictionary *d) {
-                        // 解析字典，在我们的APP内，解析Data:{}
-                        //1 提供默认的解析方案
+                    [obj.obj ddAskNet:self response:^id _Nonnull(id  _Nonnull json) {
+                        ///*1 提供默认的解析方案 短时间内无法先全面*/
                         //2.暴露出给一个统一解析的接口
                         //3.每个响应的model都可以重新定制解析方案
                         
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+                        if ([self respondsToSelector:@selector(dd_defaultParse:)]) {
+                            [self performSelector:@selector(dd_defaultParse:) withObject:json];
+#pragma clang diagnostic pop
+                        } else {
+                            [DDNetParse dd_defaultParse:self json:json];
+                        }
+            
                         return self;
                     }];
                 }
@@ -210,6 +247,83 @@ static void *NSObjectDD_DelegatesKey = &NSObjectDD_DelegatesKey;
         self.DD_Delegates = delegates;
     }
     return delegates;
+}
+
+#pragma mark - 数组相关操作
+- (void)setDD_Operation:(BOOL)DD_Operation {
+    if (self.isDD_Operation != DD_Operation) {
+        objc_setAssociatedObject(self, NSObjectDD_OperationKey, [NSNumber numberWithBool:DD_Operation], OBJC_ASSOCIATION_ASSIGN);
+        if (DD_Operation == true) {
+            self.DD_Operation = false;
+            for (DDNetObject *obj in self.DD_Delegates) {
+                if (obj.isFlagArray) {
+                    [obj.obj ddOperation:self.DD_Operation indexS:self.dd_indexS modelS:self.dd_modelS];
+                }
+            }
+        }
+    }
+
+}
+
+- (BOOL)isDD_Operation {
+    id operation = objc_getAssociatedObject(self, NSObjectDD_OperationKey);
+    return [(NSNumber *)operation boolValue];
+}
+
+- (void)setDD_OperationtFlag:(BOOL)DD_OperationtFlag {
+    if (self.isDD_OperationtFlag != DD_OperationtFlag) {
+        objc_setAssociatedObject(self, NSObjectDD_OperationtFlagKey, [NSNumber numberWithBool:DD_OperationtFlag], OBJC_ASSOCIATION_ASSIGN);
+    }
+}
+
+- (BOOL)isDD_OperationtFlag {
+    id flag = objc_getAssociatedObject(self, NSObjectDD_OperationtFlagKey);
+    return [(NSNumber *)flag boolValue];
+}
+
+
+- (void)dd_updateArrayWithOperation:(DDArrayOperation)operation indexS:(NSArray<NSNumber *> *)indexS modelS:(NSArray *)modelS {
+    if (self.isDD_OperationtFlag == false) {
+        self.DD_Operation = true;
+    }
+    self.dd_operation = operation;
+    self.dd_indexS = indexS;
+    self.dd_modelS = modelS;
+}
+
+- (void)dd_updateArraySuAccept {
+    self.DD_OperationtFlag = true;
+}
+
+- (void)dd_updateArrayReAccept {
+    self.DD_OperationtFlag = false;
+}
+
+- (void)setDd_operation:(DDArrayOperation)dd_operation {
+    if (self.dd_operation != dd_operation) {
+        objc_setAssociatedObject(self, NSObjectdd_OperationKey, [NSNumber numberWithUnsignedInteger:dd_operation], OBJC_ASSOCIATION_ASSIGN);
+    }
+}
+
+- (DDArrayOperation)dd_operation {
+    id o = objc_getAssociatedObject(self, NSObjectdd_OperationKey);
+    return [(NSNumber *)o unsignedIntegerValue];
+}
+
+- (void)setDd_indexS:(NSArray<NSNumber *> *)dd_indexS {
+    objc_setAssociatedObject(self, NSObjectdd_indexSKey, dd_indexS, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (NSArray<NSNumber *> *)dd_indexS {
+    return objc_getAssociatedObject(self, NSObjectdd_indexSKey);
+}
+
+- (void)setDd_modelS:(NSArray *)dd_modelS {
+    objc_setAssociatedObject(self, NSObjectdd_modelSKey, dd_modelS, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (NSArray *)dd_modelS {
+    return objc_getAssociatedObject(self, NSObjectdd_modelSKey);
 }
 
 @end

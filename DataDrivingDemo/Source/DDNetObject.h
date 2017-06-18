@@ -29,6 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, getter=isFlagUpload) BOOL flagUpload;
 
 /**
+ 是否 实现了 DDNetResponder 更新数组的操作
+ */
+@property (nonatomic, getter=isFlagArray) BOOL flagArray;
+
+/**
  便利的初始化方法，不是必须的初始化方法
 
  @param delegate 实现了DDNetResponder的对象

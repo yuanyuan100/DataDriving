@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (const char *)dd_getChar {
     return [self UTF8String];
 }
+
++ (NSString *)dd_getString:(const char *)cStr {
+    return [NSString stringWithCString:cStr encoding:NSUTF8StringEncoding];
+}
 @end
 
 NS_ASSUME_NONNULL_END
