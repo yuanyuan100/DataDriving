@@ -7,13 +7,17 @@
 //
 
 #import "TwoViewController.h"
-#import "NSObject+DDNet.h"
+#import "ThreeViewController.h"
+
 #import "NSObject+DDView.h"
 
+#import "OneModel.h"
 
-
-@interface TwoViewController () <DDNetResponder>
-@property (weak, nonatomic) IBOutlet UILabel *labelTwo;
+@interface TwoViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UILabel *orangeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *buleLabel;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @end
 
@@ -22,25 +26,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.model dd_bindObject:self.label oPath:@"text" mPath:@"name"];
     
-    __weak typeof(self) weakSelf = self;
-    [self.model dd_bindObject:self.labelTwo bothPath:@"text" positive:^BOOL(NSDictionary<DDKeyValueDataFlowKey,id> * _Nonnull change) {
-        weakSelf.model;
+    [self.model dd_bindObject:self.orangeLabel oPath:@"text" mPath:@"name" positive:^BOOL(NSDictionary<DDKeyValueDataFlowKey,id> * _Nonnull change) {
+        // 不接受model的改变
+        return NO;
+    } reverse:nil];
+    [self.model dd_bindObject:self.buleLabel oPath:@"text" mPath:@"name" positive:^BOOL(NSDictionary<DDKeyValueDataFlowKey,id> * _Nonnull change) {
+        
         return YES;
-    } reverse:^BOOL(NSDictionary<DDKeyValueDataFlowKey,id> * _Nonnull change) {
-        weakSelf.labelTwo;
-        return YES;
-    }];
+    } reverse:nil];
     
-    [self.model dd_add:self];
-}
-- (IBAction)askNet:(id)sender {
-    [self.model dd_pull];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ddtextfieldDidChanged:) name:UITextFieldTextDidChangeNotification object:self.textField];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"next" style:UIBarButtonItemStylePlain target:self action:@selector(next)];
 }
 
-- (void)ddAskNet:(id)model response:(id (^)(id))response {
-    NSLog(@"two");
-    self.model.text = @"chen jing";
+- (void)ddtextfieldDidChanged:(NSNotification *)noti {
+    self.model.name = [noti.object text];
+}
+
+- (void)next {
+    ThreeViewController *three = [ThreeViewController new];
+    three.model = self.model;
+    [self.navigationController pushViewController:three animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,7 +59,11 @@
 
 -(void)dealloc {
     NSLog(@"注销 %s", __FILE__);
-    [self.model dd_removeBind:self.labelTwo bothPath:@"text"];
+    [self.model dd_removeBind:self.label oPath:@"text" mPath:@"name"];
+    [self.model dd_removeBind:self.textField oPath:@"text" mPath:@"name"];
+    [self.model dd_removeBind:self.orangeLabel oPath:@"text" mPath:@"name"];
+    [self.model dd_removeBind:self.buleLabel oPath:@"text" mPath:@"name"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 /*
