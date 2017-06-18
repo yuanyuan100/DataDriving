@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 static void *NSObjectDD_ViewKVOCenterSet = &NSObjectDD_ViewKVOCenterSet;
 static void *NSObjectDD_SelfFlag = &NSObjectDD_SelfFlag;
+static void *NSObjectDD_WhoChangedFlag = &NSObjectDD_WhoChangedFlag;
 
 DDKeyValueDataFlowKey const DDKeyValueDataWillFlowKey     = @"will";
 DDKeyValueDataFlowKey const DDKeyValueDataDidFlowKey      = @"did";
@@ -34,6 +35,10 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
  改变是否来自 自己先改变被绑定者，被绑定者的改变又来改变自己。if YES 自己不在改变 防止循环KVO
  */
 @property (nonatomic, getter=isDD_SelfFlag) BOOL DD_SelfFlag;
+/**
+ 记录self 最初的改变来自哪个绑定者， 必须弱引用。
+ */
+@property (nonatomic, weak) id DD_WhoChangedFlag;
 @end
 
 @implementation NSObject (DDView)
@@ -170,11 +175,22 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
         }
         if (true == executeKVC) {
             // 观察到object 属性发生变化
-            if (false == [weakChanged isEqual:weakSelf] || false == self.isDD_SelfFlag) {
-                self.DD_SelfFlag = true;
-                [weakChanged setValue:change[NSKeyValueChangeNewKey] forKey:cPath];
+            if (false == [weakChanged isEqual:weakSelf] || false == weakSelf.isDD_SelfFlag) {
+                weakSelf.DD_SelfFlag = true;
+                
+                if (true == [weakChanged isEqual:weakSelf]) {
+                    weakSelf.DD_WhoChangedFlag = object;
+                }
+                
+                if (true == [weakChanged isEqual:weakSelf.DD_WhoChangedFlag]) {
+                    weakSelf.DD_WhoChangedFlag = nil;
+                } else {
+                    [weakChanged setValue:change[NSKeyValueChangeNewKey] forKey:cPath];
+                }
+                
+                
             } else {
-                self.DD_SelfFlag = false;
+                weakSelf.DD_SelfFlag = false;
             }
             
             if (block) {
@@ -237,6 +253,15 @@ DDKeyValueDataFlowKey const DDKeyValueDataFlowOldKey      = @"old";
     id flag = objc_getAssociatedObject(self, NSObjectDD_SelfFlag);
     return [(NSNumber *)flag boolValue];
 }
+
+- (void)setDD_WhoChangedFlag:(nullable id)DD_WhoChangedFlag {
+    objc_setAssociatedObject(self, NSObjectDD_WhoChangedFlag, DD_WhoChangedFlag, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (nullable id)DD_WhoChangedFlag {
+    return objc_getAssociatedObject(self, NSObjectDD_WhoChangedFlag);
+}
+
 
 @end
 

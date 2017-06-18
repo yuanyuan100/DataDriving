@@ -28,7 +28,7 @@
     
     [self.model dd_bindObject:self.threeModel oPath:@"text" mPath:@"name" positive:^BOOL(NSDictionary<DDKeyValueDataFlowKey,id> * _Nonnull change) {
         // 从model发生的改变threeModel不接受
-        return NO;
+        return YES;
     } reverse:^BOOL(NSDictionary<DDKeyValueDataFlowKey,id> * _Nonnull change) {
         // threeModel发生的改变 model接受
         return YES;
