@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "DataDriving"
-  s.version      = "1.0.2"
+  s.version      = "1.0.3"
   s.summary      = "data driving develope"
   s.description  = <<-DESC
   data driving develope, so developer can write less code, reduce errors.
