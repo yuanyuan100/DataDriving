@@ -8,6 +8,8 @@
 
 #import "DDKVOCenter.h"
 
+#import "NSString+DDSet.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DDKVOCenter ()
