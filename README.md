@@ -41,7 +41,8 @@
 ###### 1.直接导入项目
 
 将source拖入到你的项目中
-##### 2.cocoapods导入项目
+
+###### 2.cocoapods导入项目
 
 pod 'DataDriving'
 ### 注意事项
