@@ -25,10 +25,31 @@
              
 ### 示例
 
+导入
+
+    #import "DataDrivingHeader.h"
+    
+或者
+
+    #import "NSObject+DDNet.h"
+    #import "NSObject+DDView.h"
+    #import "DDNetParse.h"
+    
+
 ### 导入方案
 
+###### 1.直接导入项目
+
+将source拖入到你的项目中
+##### 2.cocoapods导入项目
+
+pod 'DataDriving'
 ### 注意事项
+ 
+"DDNetParse"类必须实现分类, 并且重写如下方法，提供默认的json转model。
+
+    + (void)dd_defaultParse:(id)model json:(id)json;
 
 ### License
 
-MIT
+    MIT
