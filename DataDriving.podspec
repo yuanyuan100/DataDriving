@@ -21,7 +21,8 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "8.0"
 
-  s.source       = { :git => "https://github.com/yuanyuan100/DataDriving.git", :tag => s.version}
+  # s.source       = { :git => "https://github.com/yuanyuan100/DataDriving.git", :tag => s.version}
+  s.source       = { :git => "https://git.oschina.net/yuanyuan100/DataDriving.git", :tag => s.version}
 
   s.source_files  = "DataDrivingDemo/Source/*.{h,m}"
 
