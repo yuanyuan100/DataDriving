@@ -17,15 +17,13 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/yuanyuan100/DataDriving"
   s.license      = "MIT"
 
-  s.author             = { "pengyy" => "469092943@qq.com" }
+  s.author       = { "pengyy" => "469092943@qq.com" }
 
   s.platform     = :ios, "8.0"
 
-  s.source       = { :git => "https://github.com/yuanyuan100/DataDriving.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/yuanyuan100/DataDriving.git", :tag => s.version}
 
   s.source_files  = "DataDrivingDemo/Source/*.{h,m}"
-
-  s.public_header_files = "DataDrivingDemo/Source/DataDrivingHeader.h"
 
   s.requires_arc = true
 end
