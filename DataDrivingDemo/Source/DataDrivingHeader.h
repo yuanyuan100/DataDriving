@@ -14,5 +14,6 @@
 #import "NSObject+DDView.h"
 #import "NSObject+DDNet.h"
 #import "DDNetParse.h"
+#import "DDNetResponder.h"
 
 #endif /* DataDrivingHeader_h */
