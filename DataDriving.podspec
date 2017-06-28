@@ -25,6 +25,6 @@ Pod::Spec.new do |s|
   # s.source       = { :git => "https://git.oschina.net/yuanyuan100/DataDriving.git", :tag => s.version}
 
   s.source_files  = "DataDrivingDemo/Source/*.{h,m}"
-  s.public_header_files  = "DataDrivingDemo/Source/DataDrivingHeader.h"
+  s.public_header_files  =  "DataDrivingDemo/Source/DataDrivingHeader.h", "DataDrivingDemo/Source/NSObject+DDView.h", "DataDrivingDemo/Source/NSObject+DDNet.h", "DataDrivingDemo/Source/DDNetParse.h", "DataDrivingDemo/Source/DDNetResponder.h"
   s.requires_arc = true
 end
