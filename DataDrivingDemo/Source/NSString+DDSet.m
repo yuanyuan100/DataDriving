@@ -15,7 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation NSString (DDSet)
 
 - (SEL)dd_propertySetMethod {
-    NSString *methodStr = [NSString stringWithFormat:@"set%@:", [self capitalizedString]];
+    NSString *f = [self substringToIndex:1];
+    f = [f uppercaseString];
+    NSString *methodStr = [NSString stringWithFormat:@"set%@%@:", f, [self substringFromIndex:1]];
     return NSSelectorFromString(methodStr);
 }
 
