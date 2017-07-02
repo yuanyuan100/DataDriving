@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "DataDriving"
-  s.version      = "1.0.4"
+  s.version      = "1.0.5"
   s.summary      = "data driving develope"
   s.description  = <<-DESC
   data driving develope, so developer can write less code, reduce errors.
@@ -25,6 +25,6 @@ Pod::Spec.new do |s|
   # s.source       = { :git => "https://git.oschina.net/yuanyuan100/DataDriving.git", :tag => s.version}
 
   s.source_files  = "DataDrivingDemo/Source/*.{h,m}"
-  s.public_header_files  =  "DataDrivingDemo/Source/DataDrivingHeader.h", "DataDrivingDemo/Source/NSObject+DDView.h", "DataDrivingDemo/Source/NSObject+DDNet.h", "DataDrivingDemo/Source/DDNetParse.h", "DataDrivingDemo/Source/DDNetResponder.h"
+  s.public_header_files  =  "DataDrivingDemo/Source/*.{h}"
   s.requires_arc = true
 end
